@@ -1,0 +1,51 @@
+#canard
+{
+  background-color: rgba(2, 0, 0, 0.7);
+  width: 50%;
+  height: 70%;
+}
+
+h1
+{
+   font-family: 'Pacifico', cursive; 
+   background-image: url("fondd.png");
+  
+}
+
+#c
+{
+    width: 15px;
+    height: 15px;
+
+}
+#img
+{
+    width: 35%;
+    border-width: 3;
+    border: double;
+}
+
+body
+{
+
+  background-size: 115px 200px ;
+  background-image: url("fonddd.jpeg");
+  background-repeat: repeat;
+  background-size: : 400%;  
+}
+
+
+ 
+{
+    width: 400px;
+    height: 200px;
+}
+#lol
+{
+  background-color: white;
+}
+#com
+{
+  height: 200px;
+  width: 300px;
+}
