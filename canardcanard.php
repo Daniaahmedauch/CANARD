@@ -12,11 +12,11 @@
 <center>  <h1>  AJOUTE TON CANARD    </h1> </center> </br> </br>
 
 
- <center> <form action="canard.php" method="post" > 
+ <center> <form  method="post" > 
 <div id="canard"> 
 <tr>
    
-    <legend id="lol">  A TU VU UN CANARD AUJOURD-HUI ?  <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg"> <img id="c" src="canard.jpeg">    </legend>
+    <legend id="atuvu">  A TU VU UN CANARD AUJOURD-HUI ?     </legend>
    <p>
       <input type="radio" name="size" id="size_1" value="small" name="titre">
       <label for="size_1">OUI</label>
@@ -25,31 +25,108 @@
       <input type="radio" name="size" id="size_2" value="medium" name="titre">
       <label for="size_2">NON</label>
     </p>
-     <span id="lol"> OU  </span>
+     <span id="ou"> OU  </span>
         <strong><abbr title="required">*</abbr></strong>
       </label>
-      <input type="text" id="titre" name="titre">
+      <input type="text" id="titre" name="ou">
  
     </p>
 
     <p>
       <label for="pwd">
-        <span id="lol">  QUAND :  </span>
+        <span id="quand">  QUAND :  </span>
         <strong><abbr title="required">*</abbr></strong>
-        <input type="text"  name="contenus">
+        <input type="text"  name="quand">
       </label>
      
      </br> </br>
       <label for="pwd"> 
-        <span id="lol">  COMMENTAIRES : </span>  </br>
+        <span id="commentaires">  COMMENTAIRES : </span>  </br>
         <strong><abbr title="required">*</abbr></strong> </br>
         <input size ="39" type="text" id="com" name="commentaires">
         </br>
       </label> 
-      <button> ENVOYER VERS .. </button>
+       <button>  ENVOYER VERS .. </button> 
+       <a href=" canard.php"> <mark> VOIR LE FORMULAIRE :) </mark> </a>
+
+
   </tr>
 </form>
 </div>
 </center>
+
+<?php
+
+     /*
+        Enregistrer le nouveau post
+     */
+
+       $ou=$_POST['ou'];
+       $quand=$_POST['quand'];
+       $commentaires=$_POST['commentaires'];
+       
+    
+
+         // on se connecte à mysql :
+
+         
+        try 
+       {  
+
+           $bdd = new PDO( 'mysql:host=localhost;dbname=canard;charset=utf8','dania','0000');
+         
+       }
+
+          // en cas d'erreur on affiche un message :
+
+        
+        catch (Exception $e)
+        {   
+           die('Erreur : ' . $e->getMessage());
+      
+        }
+
+
+
+       $req = $bdd->prepare('
+          INSERT INTO form ( ou,quand,commentaires ) 
+          VALUES( :ou, :quand, :commentaires );
+        ');
+
+
+       $req->execute(array(
+        ':ou' => $ou,
+        ':quand' => $quand,
+          ':commentaires' => $commentaires
+
+         
+       ));
+
+
+
+
+       /*
+
+          Afficher la page
+        */
+
+       $reponse = $bdd->query('SELECT * FROM form');
+       while($donnees=$reponse->fetch())
+
+   {
+
+
+?>
+
+
+
+    <!--  affichage des données -->
+<!-- <?php
+   
+      
+      }
+
+?> -->
+
 </body>
 </html>
